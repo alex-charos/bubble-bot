@@ -45,11 +45,13 @@ public class Field {
     private ArrayList<Point> enemyPositions;
     private ArrayList<Point> snippetPositions;
     private ArrayList<Point> weaponPositions;
+    private ArrayList<Point> inaccessiblePositions;
 
     public Field() {
         this.enemyPositions = new ArrayList<>();
         this.snippetPositions = new ArrayList<>();
         this.weaponPositions = new ArrayList<>();
+        this.inaccessiblePositions = new ArrayList<>();
     }
 
     /**
@@ -81,6 +83,7 @@ public class Field {
         this.enemyPositions.clear();
         this.snippetPositions.clear();
         this.weaponPositions.clear();
+        this.inaccessiblePositions.clear();
     }
 
     /**
@@ -109,6 +112,8 @@ public class Field {
                         this.enemyPositions.add(new Point(x, y));
                     } else if (c == 'W') {
                         this.weaponPositions.add(new Point(x, y));
+                    } else if (c == 'x') {
+                    	this.weaponPositions.add(new Point(x, y));
                     }
                 }
             }
