@@ -5,14 +5,53 @@ import static org.junit.Assert.assertEquals;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 import org.junit.Test;
 
 import gr.charos.bot.bubblebot.MoveType;
 import gr.charos.bot.bubblebot.Utils;
+import gr.charos.bot.bubblebot.field.Field;
+import gr.charos.bot.bubblebot.field.MoveDecision;
+import gr.charos.bot.bubblebot.field.SnippetDecider;
 
 public class NearestPositionTest {
 
+	
+	
+	@Test
+	public void testRouting() throws Exception {
+		Field f = new Field();
+		f.setHeight(4);
+		f.setWidth(4);
+		f.initField();
+		f.getField()[1][1] = "x";
+		f.getField()[2][1] = "x";
+		f.getField()[2][2] = "x";
+		f.getField()[2][3] = "x";
+		
+		Point me = new Point(1,2);
+		
+		Point tareg = new Point(3,0);
+		
+		MoveDecision d = new SnippetDecider();
+		
+		Queue<MoveType> mt = Utils.getRouteToPoint(me, tareg, f);
+		assertEquals(MoveType.LEFT, mt.poll());
+		assertEquals(MoveType.UP, mt.poll());
+		assertEquals(MoveType.UP, mt.poll());
+		assertEquals(MoveType.RIGHT, mt.poll());
+		assertEquals(MoveType.RIGHT, mt.poll());
+		assertEquals(MoveType.RIGHT, mt.poll());
+		/*
+		 * |0,0|1,0|2,0|3,0
+		 * |0,1|1,1|2,1|3,1
+		 * |0,2|1,2|2,2|3,2
+		 * |0,3|1,3|2,3|3,3
+		 * 
+		 * 
+		 */
+	}
 	
 	@Test
 	public void testPositionAfterMove() {

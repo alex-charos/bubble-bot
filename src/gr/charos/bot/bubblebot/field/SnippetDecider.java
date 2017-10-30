@@ -4,9 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.Stack;
-import java.util.stream.Collectors;
 
 import gr.charos.bot.bubblebot.MoveType;
 import gr.charos.bot.bubblebot.Utils;
@@ -33,7 +31,8 @@ public class SnippetDecider implements MoveDecision {
 		quest.get(nearestSnippet).put(me, ++soFar);
 		ArrayList<MoveType> possibleMoves =f.getValidMoveTypes();
 		Move m =new Move(MoveType.PASS);
-		if (me.getX() > nearestSnippet.getX() && possibleMoves.contains(MoveType.LEFT) && (route.isEmpty() || !Utils.positionAfterMove(me, MoveType.LEFT).equals(route.peek()))) {
+		if (me.getX() > nearestSnippet.getX() && possibleMoves.contains(MoveType.LEFT) 
+				&& (route.isEmpty() || !Utils.positionAfterMove(me, MoveType.LEFT).equals(route.peek()))) {
 			m =new Move(MoveType.LEFT);
 		} else if (me.getY() > nearestSnippet.getY() && possibleMoves.contains(MoveType.UP) && (route.isEmpty() || !Utils.positionAfterMove(me, MoveType.UP).equals(route.peek()))) {
 			m =new Move(MoveType.UP);

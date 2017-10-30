@@ -209,4 +209,19 @@ public class Field {
     public ArrayList<Point> getWeaponPositions() {
         return this.weaponPositions;
     }
+
+	public ArrayList<Point> getInaccessiblePositions() {
+		return inaccessiblePositions;
+	}
+
+	public void setInaccessiblePositions(ArrayList<Point> inaccessiblePositions) {
+		this.inaccessiblePositions = inaccessiblePositions;
+	}
+
+	public String[][] getField() {
+		return field;
+	}
+
+	
+	
 }
