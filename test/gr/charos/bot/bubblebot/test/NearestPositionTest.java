@@ -79,26 +79,24 @@ public class NearestPositionTest {
 		f.getField()[2][1] = "x";
 		f.getField()[2][0] = "x";
 		f.getField()[1][0] = "x";
-		f.getField()[3][4] = "x";
-		f.getField()[3][5] = "x";
+ 		f.getField()[3][5] = "x";
 		
 		Point me = new Point(1,3);
 		
 		Point tareg = new Point(5,5);
 		
-		 //[down, down, left, left, up, up, up, right, up, right, right, right, right, down, down, down down]
 		Queue<MoveType> mt = Utils.getRouteToPoint(me, tareg, f);
 		assertEquals(MoveType.DOWN, mt.poll());
 
 		
 		/*
-		 * |0,0|1,0|2,0|3,0|4,0|5,0
-		 * |0,1|1,1|2,1|3,1|4,1|5,1
-		 * |0,2|1,2|2,2|3,2|4,2|5,2
-		 * |0,3|1,3|2,3|3,3|4,3|5,3
-		 * |0,4|1,4|2,4|3,4|4,4|5,4
-		 * |0,5|1,5|2,5|3,5|4,5|5,5
-		 */
+		 * |0,0    |1,0  X   |2,0  X   |3,0      |4,0        |5,0
+		 * |0,1    |1,1      |2,1  X   |3,1      |4,1        |5,1
+		 * |0,2    |1,2      |2,2      |3,2      |4,2        |5,2
+		 * |0,3 X  |1,3  ME  |2,3 X    |3,3      |4,3        |5,3
+		 * |0,4    |1,4      |2,4      |3,4  X   |4,4        |5,4
+		 * |0,5    |1,5      |2,5      |3,5  X   |4,5        |5,5
+		     */                          
 	}
 	@Test
 	public void testRoutingSimpleInverseLScenarioXRight() throws Exception {
@@ -117,7 +115,7 @@ public class NearestPositionTest {
 		
 		MoveDecision d = new SnippetDecider();
 		
-		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(tareg.getX() - me.getX()).intValue(), MoveType.RIGHT, f, new HashSet<>());
+		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(tareg.getX() - me.getX()).intValue(), MoveType.RIGHT, MoveType.UP,f, new HashSet<>());
 		assertEquals(MoveType.LEFT, mt.poll());
 		assertEquals(MoveType.UP, mt.poll());
 		assertEquals(MoveType.UP, mt.poll());
@@ -151,7 +149,7 @@ public class NearestPositionTest {
 		
 		MoveDecision d = new SnippetDecider();
 		
-		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(me.getY() - tareg.getY()).intValue(), MoveType.UP, f, new HashSet<>());
+		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(me.getY() - tareg.getY()).intValue(), MoveType.UP,MoveType.RIGHT, f, new HashSet<>());
 		assertEquals(MoveType.DOWN, mt.poll());
 		assertEquals(MoveType.RIGHT, mt.poll());
 		assertEquals(MoveType.RIGHT, mt.poll());
@@ -186,7 +184,7 @@ public class NearestPositionTest {
 		
 		MoveDecision d = new SnippetDecider();
 		
-		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(me.getX() - tareg.getX()).intValue(), MoveType.LEFT, f, new HashSet<>());
+		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(me.getX() - tareg.getX()).intValue(), MoveType.LEFT,MoveType.UP, f, new HashSet<>());
 		assertEquals(MoveType.RIGHT, mt.poll());
 		assertEquals(MoveType.UP, mt.poll());
 		assertEquals(MoveType.UP, mt.poll());
@@ -222,7 +220,7 @@ public class NearestPositionTest {
 		
 		MoveDecision d = new SnippetDecider();
 		
-		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(tareg.getX() - me.getX()).intValue(), MoveType.RIGHT, f, new HashSet<>());		assertEquals(MoveType.LEFT, mt.poll());
+		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(tareg.getX() - me.getX()).intValue(), MoveType.RIGHT,MoveType.UP, f, new HashSet<>());		assertEquals(MoveType.LEFT, mt.poll());
 		assertEquals(MoveType.DOWN, mt.poll());
 		assertEquals(MoveType.RIGHT, mt.poll());
 		assertEquals(MoveType.RIGHT, mt.poll());
@@ -255,7 +253,7 @@ public class NearestPositionTest {
 		
 		MoveDecision d = new SnippetDecider();
 		
-		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(me.getX() - tareg.getX()).intValue(), MoveType.LEFT, f, new HashSet<>());
+		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(me.getX() - tareg.getX()).intValue(), MoveType.LEFT,MoveType.UP, f, new HashSet<>());
 		assertEquals(MoveType.RIGHT, mt.poll());
 		assertEquals(MoveType.DOWN, mt.poll());
 		assertEquals(MoveType.LEFT, mt.poll());

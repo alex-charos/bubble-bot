@@ -60,14 +60,6 @@ public class Utils {
 		} else if (xShift<0) {
 			xDirection = MoveType.LEFT;
 		}
-		
-		if (xDirection !=null && !me.equals(targetLocation)) {
-			route.addAll(makeXMoveRight(me, Math.abs(xShift), xDirection, field, new HashSet<>()));
-			Queue<MoveType> tmp = new LinkedList<>(route);
-			while (!tmp.isEmpty()) {
-				me = positionAfterMove(me, tmp.poll());
-			}
-		}
 		int yShift = new Double( targetLocation.getY() - me.getY()).intValue();
 		MoveType yDirection = null;
 		if (yShift >0) {
@@ -75,14 +67,30 @@ public class Utils {
 		} else if (yShift<0) {
 			yDirection = MoveType.UP;
 		}
+		if (xDirection !=null && !me.equals(targetLocation)) {
+			route.addAll(makeXMoveRight(me, Math.abs(xShift), xDirection,yDirection, field, new HashSet<>()));
+			Queue<MoveType> tmp = new LinkedList<>(route);
+			while (!tmp.isEmpty()) {
+				me = positionAfterMove(me, tmp.poll());
+			}
+		}
+		  yShift = new Double( targetLocation.getY() - me.getY()).intValue();
+		  yDirection = null;
+		if (yShift >0) {
+			yDirection = MoveType.DOWN;
+		} else if (yShift<0) {
+			yDirection = MoveType.UP;
+		}
 		if (yDirection !=null && !me.equals(targetLocation)) {
-			route.addAll(makeXMoveRight(me, Math.abs(yShift), yDirection, field, new HashSet<>()));
+			route.addAll(makeXMoveRight(me, Math.abs(yShift), yDirection, xDirection, field, new HashSet<>()));
 		}
 		//return makeXMoveRight(me, new Double(targetLocation.getX() - me.getX()).intValue(), field, new HashSet<>());
 		return route;
 	}
 
-	public static Queue<MoveType> makeXMoveRight(Point me, int stepsOnAxis, MoveType direction, Field field,
+	
+	
+	public static Queue<MoveType> makeXMoveRight(Point me, int stepsOnAxis, MoveType direction, MoveType bias, Field field,
 			Set<Point> positionsRejected) {
 		Point p = new Point(me);
 		Queue<MoveType> route = new LinkedList<>();
@@ -93,31 +101,33 @@ public class Utils {
 		switch (direction) {
 		case RIGHT:
 			ch1 = MoveType.RIGHT;
-			ch2 = MoveType.UP;
+			ch2 = bias== MoveType.UP ?MoveType.UP: MoveType.DOWN;
 			ch3 = MoveType.LEFT;
-			ch4 = MoveType.DOWN;
+			ch4 = bias== MoveType.UP ?MoveType.DOWN: MoveType.UP;
 			break;
 		case LEFT:
 			ch1 = MoveType.LEFT;
-			ch2 = MoveType.UP;
+			ch2 = bias== MoveType.UP ?MoveType.UP: MoveType.DOWN;
 			ch3 = MoveType.RIGHT;
-			ch4 = MoveType.DOWN;
+			ch4 = bias== MoveType.UP ?MoveType.DOWN: MoveType.UP;
 			break;
 		case UP:
 			ch1 = MoveType.UP;
-			ch2 = MoveType.RIGHT;
+			ch2 = bias== MoveType.LEFT ?MoveType.LEFT: MoveType.RIGHT;
 			ch3 = MoveType.DOWN;
-			ch4 = MoveType.LEFT;
+			ch4 = bias== MoveType.LEFT ?MoveType.RIGHT: MoveType.LEFT;
 			break;
 		case DOWN:
 			ch1 = MoveType.DOWN;
-			ch2 = MoveType.RIGHT;
+			ch2 = bias== MoveType.LEFT ?MoveType.LEFT: MoveType.RIGHT;
 			ch3 = MoveType.UP;
-			ch4 = MoveType.LEFT;
+			ch4 = bias== MoveType.LEFT ?MoveType.RIGHT: MoveType.LEFT;
 			break;
 		default:
 			break;
 		}
+		
+		 
 		positionsRejected.add(p);
 		while (stepsOnAxis > 0) {
 
@@ -135,18 +145,18 @@ public class Utils {
 							throw new RuntimeException("I am locked!!!!");
 						} else {
 							route.add(ch4);
-							route.addAll(makeXMoveRight(pDown, stepsOnAxis,direction, field,  positionsRejected));
+							route.addAll(makeXMoveRight(pDown, stepsOnAxis,direction,bias, field,  positionsRejected));
 							return route;
 						}
 
 					} else {
 						route.add(ch3);
-						route.addAll(makeXMoveRight(pLeft, stepsOnAxis + 1,direction, field, positionsRejected));
+						route.addAll(makeXMoveRight(pLeft, stepsOnAxis + 1,direction, bias,field, positionsRejected));
 						return route;
 					}
 				} else {
 					route.add(ch2);
-					route.addAll(makeXMoveRight(pUp, stepsOnAxis,direction, field, positionsRejected));
+					route.addAll(makeXMoveRight(pUp, stepsOnAxis,direction,bias, field, positionsRejected));
 					return route;
 				}
 
@@ -157,5 +167,10 @@ public class Utils {
 			}
 		}
 		return route;
+	}
+	
+	class Compass {
+		MoveType xDirection;
+		MoveType yDirection;
 	}
 }
