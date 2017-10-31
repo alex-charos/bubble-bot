@@ -7,8 +7,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
-import javax.management.RuntimeErrorException;
-
 import gr.charos.bot.bubblebot.field.Field;
 
 public class Utils {
