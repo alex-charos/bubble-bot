@@ -17,7 +17,7 @@
  *     file that was distributed with this source code.
  */
 
-package gr.charos.bot.bubblebot.field;
+package gr.charos.bot.bubblebot.mrhackman;
 
 import java.awt.*;
 import java.util.ArrayList;

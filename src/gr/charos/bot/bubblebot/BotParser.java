@@ -21,8 +21,8 @@ package gr.charos.bot.bubblebot;
 
 import java.util.Scanner;
 
-import gr.charos.bot.bubblebot.move.Move;
-import gr.charos.bot.bubblebot.player.Player;
+import gr.charos.bot.bubblebot.mrhackman.Move;
+import gr.charos.bot.bubblebot.mrhackman.Player;
 
 /**
  * bot.BotParser

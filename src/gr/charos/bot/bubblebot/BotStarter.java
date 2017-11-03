@@ -22,9 +22,9 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
-import gr.charos.bot.bubblebot.field.MoveDecision;
-import gr.charos.bot.bubblebot.field.SnippetDecider;
-import gr.charos.bot.bubblebot.move.Move;
+import gr.charos.bot.bubblebot.decider.MoveDecider;
+import gr.charos.bot.bubblebot.decider.impl.SnippetDecider;
+import gr.charos.bot.bubblebot.mrhackman.Move;
 
 /**
  * bot.BotStarter
@@ -39,7 +39,7 @@ public class BotStarter {
 
 	private Random rand;
 
-	private MoveDecision decier;
+	private MoveDecider decier;
 	private BotStarter() {
 		this.rand = new Random();
 		this.decier = new SnippetDecider();

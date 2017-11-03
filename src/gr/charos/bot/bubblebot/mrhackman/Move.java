@@ -17,7 +17,7 @@
  *     file that was distributed with this source code.
  */
 
-package gr.charos.bot.bubblebot.move;
+package gr.charos.bot.bubblebot.mrhackman;
 
 import gr.charos.bot.bubblebot.MoveType;
 

@@ -17,7 +17,7 @@
  *     file that was distributed with this source code.
  */
 
-package gr.charos.bot.bubblebot.player;
+package gr.charos.bot.bubblebot.mrhackman;
 
 /**
  * player.Player

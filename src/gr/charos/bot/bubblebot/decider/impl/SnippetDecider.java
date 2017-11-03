@@ -1,18 +1,19 @@
-package gr.charos.bot.bubblebot.field;
+package gr.charos.bot.bubblebot.decider.impl;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Queue;
-import java.util.Stack;
 
 import gr.charos.bot.bubblebot.MoveType;
 import gr.charos.bot.bubblebot.Utils;
-import gr.charos.bot.bubblebot.move.Move;
+import gr.charos.bot.bubblebot.decider.MoveDecider;
+import gr.charos.bot.bubblebot.mrhackman.Field;
+import gr.charos.bot.bubblebot.mrhackman.Move;
+import gr.charos.bot.bubblebot.routing.Route;
 
-public class SnippetDecider implements MoveDecision {
+
+public class SnippetDecider implements MoveDecider {
 
 	private Queue<MoveType> route = new LinkedList<>();
 
@@ -23,7 +24,8 @@ public class SnippetDecider implements MoveDecision {
 			ArrayList<Point> snippets = f.getSnippetPositions();
 			Point nearestSnippet = Utils.getNearestItem(me, snippets);
 			try {
-				route = Utils.getRouteToPoint(me, nearestSnippet, f);
+				Route r = new Route(f, me, nearestSnippet);
+				route = r.getRouteToPoint();
 			} catch (Exception ex) {
 
 			}

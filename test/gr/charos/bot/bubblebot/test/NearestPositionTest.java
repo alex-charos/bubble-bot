@@ -13,9 +13,10 @@ import org.junit.Test;
 
 import gr.charos.bot.bubblebot.MoveType;
 import gr.charos.bot.bubblebot.Utils;
-import gr.charos.bot.bubblebot.field.Field;
-import gr.charos.bot.bubblebot.field.MoveDecision;
-import gr.charos.bot.bubblebot.field.SnippetDecider;
+import gr.charos.bot.bubblebot.decider.MoveDecider;
+import gr.charos.bot.bubblebot.decider.impl.SnippetDecider;
+import gr.charos.bot.bubblebot.mrhackman.Field;
+import gr.charos.bot.bubblebot.routing.Route;
 
 public class NearestPositionTest {
 
@@ -39,7 +40,8 @@ public class NearestPositionTest {
 		Point tareg = new Point(5,5);
 		
 		 //[down, down, left, left, up, up, up, right, up, right, right, right, right, down, down, down down]
-		Queue<MoveType> mt = Utils.getRouteToPoint(me, tareg, f);
+		
+		Queue<MoveType> mt = (new Route(f,me,tareg)).getRouteToPoint();
 		assertEquals(MoveType.DOWN, mt.poll());
 		assertEquals(MoveType.DOWN, mt.poll());
 		assertEquals(MoveType.LEFT, mt.poll());
@@ -85,7 +87,7 @@ public class NearestPositionTest {
 		
 		Point tareg = new Point(5,5);
 		
-		Queue<MoveType> mt = Utils.getRouteToPoint(me, tareg, f);
+		Queue<MoveType> mt = (new Route(f,me,tareg)).getRouteToPoint();
 		assertEquals(MoveType.DOWN, mt.poll());
 
 		
@@ -113,9 +115,9 @@ public class NearestPositionTest {
 		
 		Point tareg = new Point(3,0);
 		
-		MoveDecision d = new SnippetDecider();
+		MoveDecider d = new SnippetDecider();
 		
-		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(tareg.getX() - me.getX()).intValue(), MoveType.RIGHT, MoveType.UP,f, new HashSet<>());
+		Queue<MoveType> mt = (new Route(f,me,tareg)).makeXMoveRight(me, new Double(tareg.getX() - me.getX()).intValue(), MoveType.RIGHT, MoveType.UP);
 		assertEquals(MoveType.LEFT, mt.poll());
 		assertEquals(MoveType.UP, mt.poll());
 		assertEquals(MoveType.UP, mt.poll());
@@ -147,9 +149,9 @@ public class NearestPositionTest {
 		
 		Point tareg = new Point(3,0);
 		
-		MoveDecision d = new SnippetDecider();
+		MoveDecider d = new SnippetDecider();
 		
-		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(me.getY() - tareg.getY()).intValue(), MoveType.UP,MoveType.RIGHT, f, new HashSet<>());
+		Queue<MoveType> mt = (new Route(f,me,tareg)).makeXMoveRight(me, new Double(me.getY() - tareg.getY()).intValue(), MoveType.UP,MoveType.RIGHT);
 		assertEquals(MoveType.DOWN, mt.poll());
 		assertEquals(MoveType.RIGHT, mt.poll());
 		assertEquals(MoveType.RIGHT, mt.poll());
@@ -182,9 +184,9 @@ public class NearestPositionTest {
 		
 		Point tareg = new Point(0,0);
 		
-		MoveDecision d = new SnippetDecider();
+		MoveDecider d = new SnippetDecider();
 		
-		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(me.getX() - tareg.getX()).intValue(), MoveType.LEFT,MoveType.UP, f, new HashSet<>());
+		Queue<MoveType> mt = (new Route(f,me,tareg)).makeXMoveRight(me, new Double(me.getX() - tareg.getX()).intValue(), MoveType.LEFT,MoveType.UP);
 		assertEquals(MoveType.RIGHT, mt.poll());
 		assertEquals(MoveType.UP, mt.poll());
 		assertEquals(MoveType.UP, mt.poll());
@@ -218,9 +220,10 @@ public class NearestPositionTest {
 		
 		Point tareg = new Point(3,0);
 		
-		MoveDecision d = new SnippetDecider();
+		MoveDecider d = new SnippetDecider();
 		
-		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(tareg.getX() - me.getX()).intValue(), MoveType.RIGHT,MoveType.UP, f, new HashSet<>());		assertEquals(MoveType.LEFT, mt.poll());
+		Queue<MoveType> mt = (new Route(f,me,tareg)).makeXMoveRight(me, new Double(tareg.getX() - me.getX()).intValue(), MoveType.RIGHT,MoveType.UP);	
+		assertEquals(MoveType.LEFT, mt.poll());
 		assertEquals(MoveType.DOWN, mt.poll());
 		assertEquals(MoveType.RIGHT, mt.poll());
 		assertEquals(MoveType.RIGHT, mt.poll());
@@ -251,9 +254,9 @@ public class NearestPositionTest {
 		
 		Point tareg = new Point(0,0);
 		
-		MoveDecision d = new SnippetDecider();
+		MoveDecider d = new SnippetDecider();
 		
-		Queue<MoveType> mt = Utils.makeXMoveRight(me, new Double(me.getX() - tareg.getX()).intValue(), MoveType.LEFT,MoveType.UP, f, new HashSet<>());
+		Queue<MoveType> mt = (new Route(f,me,tareg)).makeXMoveRight(me, new Double(me.getX() - tareg.getX()).intValue(), MoveType.LEFT,MoveType.UP);
 		assertEquals(MoveType.RIGHT, mt.poll());
 		assertEquals(MoveType.DOWN, mt.poll());
 		assertEquals(MoveType.LEFT, mt.poll());

@@ -21,8 +21,8 @@ package gr.charos.bot.bubblebot;
 
 import java.util.HashMap;
 
-import gr.charos.bot.bubblebot.field.Field;
-import gr.charos.bot.bubblebot.player.Player;
+import gr.charos.bot.bubblebot.mrhackman.Field;
+import gr.charos.bot.bubblebot.mrhackman.Player;
 
 /**
  * bot.BotState
