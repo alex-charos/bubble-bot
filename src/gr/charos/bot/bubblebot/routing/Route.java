@@ -80,7 +80,7 @@ public class Route {
 	}
 
 	public Queue<MoveType> makeXMoveRight(Point me, int stepsOnAxis, MoveType direction, MoveType bias) {
-		Point p = new Point(me);
+		
 		Queue<MoveType> route = new LinkedList<>();
 		MoveType ch1 = null;
 		MoveType ch2 = null;
@@ -115,16 +115,16 @@ public class Route {
 			break;
 		}
 		
-		logPosition(me);
+		
 		while (stepsOnAxis > 0) {
-
-			Point pRight = Utils.positionAfterMove(p, ch1);
+			logPosition(me);
+			Point pRight = Utils.positionAfterMove(me, ch1);
 			if (!field.isPointValid(pRight) ||  pRight.equals(prevPoint)) {
-				Point pUp = Utils.positionAfterMove(p, ch2);
+				Point pUp = Utils.positionAfterMove(me, ch2);
 				if (!field.isPointValid(pUp) ||  pUp.equals(prevPoint)) {
-					Point pLeft = Utils.positionAfterMove(p, ch3);
+					Point pLeft = Utils.positionAfterMove(me, ch3);
 					if (!field.isPointValid(pLeft) || pLeft.equals(prevPoint)) {
-						Point pDown = Utils.positionAfterMove(p, ch4);
+						Point pDown = Utils.positionAfterMove(me, ch4);
 						if (!field.isPointValid(pDown) ||  pDown.equals(prevPoint)) {
 							throw new RuntimeException("I am locked!!!!");
 						} else {
@@ -150,7 +150,7 @@ public class Route {
 			} else {
 				route.add(ch1);
 				prevPoint = me;
-				p = pRight;
+				me = pRight;
 				stepsOnAxis--;
 			}
 		}

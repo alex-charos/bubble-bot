@@ -113,6 +113,7 @@ public class NearestPositionTest {
 		
 		Point me = new Point(1,2);
 		
+		
 		Point tareg = new Point(3,0);
 		
 		MoveDecider d = new SnippetDecider();
