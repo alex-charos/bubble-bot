@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 riddles.io (developers@riddles.io)
+ * Copyright 2017 riddles.io (developers@riddles.io)
  *
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -17,32 +17,32 @@
  *     file that was distributed with this source code.
  */
 
-package gr.charos.bot.bubblebot.mrhackman;
+package gr.charos.bot.bubblebot.misshackman;
 
-import gr.charos.bot.bubblebot.MoveType;
+import gr.charos.bot.bubblebot.player.AbstractPlayer;
 
 /**
- * move.Move
+ * player.Player
  *
- * Used to output a move to the engine
+ * Stores all information about a player
  *
  * @author Jim van Eeden - jim@riddles.io
  */
-public class Move {
+public class BomberPlayer extends AbstractPlayer {
 
-    private MoveType moveType = MoveType.PASS;
 
-    public Move() {}
+    public BomberPlayer(String playerName) {
+		super(playerName);
+	}
 
-    public Move(MoveType moveType) {
-        this.moveType = moveType;
-    }
+	private int bombs;
 
-    public String toString() {
-        if (this.moveType != MoveType.PASS) {
-            return moveType.toString();
-        }
+	public void setBombs(int bombs) {
+		this.bombs = bombs;
+	}
 
-        return moveType.toString();
-    }
+	public int getBombs() {
+		return this.bombs;
+	}
+
 }

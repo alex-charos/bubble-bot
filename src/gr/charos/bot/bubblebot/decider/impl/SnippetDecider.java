@@ -8,8 +8,8 @@ import java.util.Queue;
 import gr.charos.bot.bubblebot.MoveType;
 import gr.charos.bot.bubblebot.Utils;
 import gr.charos.bot.bubblebot.decider.MoveDecider;
+import gr.charos.bot.bubblebot.move.Move;
 import gr.charos.bot.bubblebot.mrhackman.Field;
-import gr.charos.bot.bubblebot.mrhackman.Move;
 import gr.charos.bot.bubblebot.routing.Route;
 
 

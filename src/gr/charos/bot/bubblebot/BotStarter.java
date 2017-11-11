@@ -18,13 +18,11 @@
  */
 
 package gr.charos.bot.bubblebot;
-import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Random;
 
 import gr.charos.bot.bubblebot.decider.MoveDecider;
 import gr.charos.bot.bubblebot.decider.impl.SnippetDecider;
-import gr.charos.bot.bubblebot.mrhackman.Move;
+import gr.charos.bot.bubblebot.move.Move;
 
 /**
  * bot.BotStarter
@@ -37,11 +35,8 @@ import gr.charos.bot.bubblebot.mrhackman.Move;
 
 public class BotStarter {
 
-	private Random rand;
-
 	private MoveDecider decier;
 	private BotStarter() {
-		this.rand = new Random();
 		this.decier = new SnippetDecider();
 	}
 
@@ -50,19 +45,7 @@ public class BotStarter {
 	 * @param state The current state of the game
 	 * @return A Move object
 	 */
-	public Move doMove(BotState state) {
-		ArrayList<MoveType> validMoveTypes = state.getField().getValidMoveTypes();
-
-		
-		Point me = state.getField().getMyPosition();
-		
-		ArrayList<Point> enemies = state.getField().getEnemyPositions();
-		
-				
-		if (validMoveTypes.size() <= 0) return new Move(); // No valid moves, pass
-
-		
-
+	public Move doMove(AbstractBotState state) {
 		return decier.decide(state.getField());
 	}
 

@@ -1,7 +1,7 @@
 package gr.charos.bot.bubblebot.decider;
 
+import gr.charos.bot.bubblebot.move.Move;
 import gr.charos.bot.bubblebot.mrhackman.Field;
-import gr.charos.bot.bubblebot.mrhackman.Move;
 
 public interface MoveDecider {
 	

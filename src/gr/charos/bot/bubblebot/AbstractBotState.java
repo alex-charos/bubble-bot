@@ -23,17 +23,9 @@ import java.util.HashMap;
 
 import gr.charos.bot.bubblebot.mrhackman.Field;
 import gr.charos.bot.bubblebot.mrhackman.Player;
+import gr.charos.bot.bubblebot.player.AbstractPlayer;
 
-/**
- * bot.BotState
- *
- * This class stores all settings of the game and the information about the
- * current state of the game. When calling this in BotStarter.doMove, you can trust that this state
- * has been update to current game state (because updates are sent before action request).
- *
- * @author Jim van Eeden - jim@riddles.io
- */
-public class BotState {
+public  abstract class AbstractBotState {
     private int MAX_TIMEBANK;
     private int TIME_PER_MOVE;
     private int MAX_ROUNDS;
@@ -41,13 +33,12 @@ public class BotState {
     private int roundNumber;
     private int timebank;
     private String myName;
-    private HashMap<String, Player> players;
 
     private Field field;
 
-    BotState() {
+    public AbstractBotState() {
         this.field = new Field();
-        this.players = new HashMap<>();
+        
     }
 
     public void setTimebank(int value) {
@@ -82,9 +73,7 @@ public class BotState {
         return this.roundNumber;
     }
 
-    public HashMap<String, Player> getPlayers() {
-        return this.players;
-    }
+   
 
     public Field getField() {
         return this.field;

@@ -17,43 +17,32 @@
  *     file that was distributed with this source code.
  */
 
-package gr.charos.bot.bubblebot.mrhackman;
+package gr.charos.bot.bubblebot.move;
 
-import gr.charos.bot.bubblebot.player.AbstractPlayer;
+import gr.charos.bot.bubblebot.MoveType;
 
 /**
- * player.Player
+ * move.Move
  *
- * Stores all information about a player
+ * Used to output a move to the engine
  *
  * @author Jim van Eeden - jim@riddles.io
  */
-public class Player extends AbstractPlayer {
+public class Move {
 
-    
-    private boolean hasWeapon;
-    private boolean isParalyzed;
-    
+    private MoveType moveType = MoveType.PASS;
 
-    public Player(String playerName) {
-		super(playerName);
-	}
-    public void setWeapon(boolean hasWeapon) {
-        this.hasWeapon = hasWeapon;
+    public Move() {}
+
+    public Move(MoveType moveType) {
+        this.moveType = moveType;
     }
 
-    public void setParalyzed(boolean isParalyzed) {
-        this.isParalyzed = isParalyzed;
-    }
+    public String toString() {
+        if (this.moveType != MoveType.PASS) {
+            return moveType.toString();
+        }
 
-    
-    public boolean isParalyzed() {
-        return this.isParalyzed;
+        return moveType.toString();
     }
-
-    
-    public boolean hasWeapon() {
-        return this.hasWeapon;
-    }
- 
 }
